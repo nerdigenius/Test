@@ -24,6 +24,8 @@ const ListScreen = () =>{
         auth.setIsLoggedIn(false)
     }
     return(
+        <AuthContext.Consumer>
+      {(auth) => (
         <View style={styles.Container}>
             <Text>WELCOME TO LIST SCREEN</Text>
             {products.map((product)=> (
@@ -33,7 +35,8 @@ const ListScreen = () =>{
                 <Button title="Log Out" onPress={()=>handleLogOut(auth as IAuthProvider)}/>
             </View>
         </View>
-    )
+    )}
+    </AuthContext.Consumer>)
 }
 
 const styles = StyleSheet.create({
