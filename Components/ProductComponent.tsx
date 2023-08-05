@@ -14,8 +14,8 @@ const ProductComponent = (props: IProduct) =>{
 
 const styles = StyleSheet.create({
     mainContainer:{
-        backgroundColor: "#cef5d8",
-        height: 20,
+        backgroundColor: "#000000",
+
         marginBottom: 10,
         display: 'flex',
         justifyContent: 'center',
