@@ -23,6 +23,7 @@ const SignupScreen = (props: any) => {
     if (email === match["email"] && password === match["password"]) {
       console.log("SUCCESSFULL");
       authData.setIsLoggedIn(true);
+      authData.setUserName(userName);
       // props.navigation.navigate("Counter")
     } else {
       console.log("FAILED");
@@ -47,7 +48,7 @@ const handleOnUsernameInput =(userInput:string)=>{
           <Image source={Logo} style={styles.imageStyles} />
           <View style={styles.inputContainer}>
           <TextInput
-              value={password}
+              value={userName}
               onChangeText={handleOnUsernameInput}
               style={styles.inputStyles}
               placeholder="Username"

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import CounterScreen from "./CounterScreen";
+import ListScreen from "./ListScreen";
 import LoginScreen from "./LoginScreen";
 import Signup from "./Signup";
 import { AuthContext, AuthProvider } from "./AuthProvider";
@@ -27,9 +27,9 @@ export default function App() {
     {/* <stack.Navigator> */}
       {/* <stack.Screen name="MAD(A)" component={HomeScreen}/>
       <stack.Screen name="List Of Products" component={ListScreen}/>
-      <stack.Screen name="Counter" component={CounterScreen}/>
+      <stack.Screen name="Counter" component={ListScreen}/>
       <stack.Screen name="SignIn" component={LoginScreen}/> */}
-      {auth?.isLoggedIn? <CounterScreen/> : <AuthStackScreens/>}
+      {auth?.isLoggedIn? <ListScreen/> : <AuthStackScreens/>}
     {/* </stack.Navigator> */}
   </NavigationContainer>}
   </AuthContext.Consumer>
