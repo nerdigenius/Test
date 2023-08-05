@@ -8,18 +8,21 @@ export interface IProduct{
 
 const ProductComponent = (props: IProduct) =>{
     return (<View style={styles.mainContainer}>
-        <Text>{props.name}</Text>
+        <Text style={styles.text}>{props.name}</Text>
     </View>)
 }
 
 const styles = StyleSheet.create({
     mainContainer:{
-        backgroundColor: "#000000",
-
+        backgroundColor: "#ffffff",
+        height:20,
         marginBottom: 10,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    text:{
+        color:"#328ba8"
     }
 })
 export default ProductComponent;
