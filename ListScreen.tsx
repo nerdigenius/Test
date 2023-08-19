@@ -1,51 +1,51 @@
-import React from "react";
+import React, { useState } from 'react';
 import { View, Text, FlatList, ListRenderItem ,StyleSheet,Button} from "react-native";
 import ProductComponent, { IProduct } from "./Components/ProductComponent";
 import axios from "axios";
 
-export interface Products{
-    id:number
-    title: string
-    price: number
-}
+interface Product {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+  }
 const ListScreen = () =>{
-    const products:IProduct[] = [
-        {
-            name: "Alu",
-            id: 1
-        },
-        {
-            name: "Piyaj",
-            id: 2
-        },
-        {
-            name: "Roshun",
-            id: 3
-        }
-    ]
+    const [products, setProducts] = useState<Product[]>([]);
+    
     const getStore = async() =>{
-        const response = await axios.get(`https://fakestoreapi.com/products`)
-        console.log(response.data)
+        try {
+            const response = await axios.get<Product[]>('https://fakestoreapi.com/products');
+            setProducts(response.data);
+          } catch (error) {
+            console.error('Error fetching products:', error);
+          }
     }
+    const renderItem = ({ item }: { item: Product }) => (
+        <View >
+          <Text >{item.title}</Text>
+          <Text >$ {item.price.toFixed(2)}</Text>
+        </View>
+      );
     
     return(
         
      
         <View style={styles.Container}>
-            <Text>WELCOME TO LIST SCREEN</Text>
-            {products.map((product)=> (
-                <ProductComponent name={product.name} id={product.id} key={product.id}/>
-            ))}
-            <View>
-                <Button title="Get Response" onPress={getStore}></Button>
-            </View>
-           
-        </View>
+        <Button title="Fetch Products" onPress={getStore} />
+        <FlatList
+          data={products}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
     )
 }
 
 const styles = StyleSheet.create({
     Container: {
+        marginTop: "10%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
