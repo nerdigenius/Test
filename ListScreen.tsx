@@ -1,8 +1,13 @@
 import React from "react";
 import { View, Text, FlatList, ListRenderItem ,StyleSheet,Button} from "react-native";
 import ProductComponent, { IProduct } from "./Components/ProductComponent";
-import { AuthContext, IAuthProvider } from "./AuthProvider";
+import axios from "axios";
 
+export interface Products{
+    id:number
+    title: string
+    price: number
+}
 const ListScreen = () =>{
     const products:IProduct[] = [
         {
@@ -18,25 +23,25 @@ const ListScreen = () =>{
             id: 3
         }
     ]
-    // const handleRenderItem : ListRenderItem<IProduct> = ({item}) =>
-    //     <Product name={item.name} id={item.id}/>;
-    const handleLogOut = (auth: IAuthProvider)=>{
-        auth.setIsLoggedIn(false)
+    const getStore = async() =>{
+        const response = await axios.get(`https://fakestoreapi.com/products`)
+        console.log(response.data)
     }
+    
     return(
-        <AuthContext.Consumer>
-      {(auth) => (
+        
+     
         <View style={styles.Container}>
             <Text>WELCOME TO LIST SCREEN</Text>
             {products.map((product)=> (
                 <ProductComponent name={product.name} id={product.id} key={product.id}/>
             ))}
             <View>
-                <Button title="Log Out" onPress={()=>handleLogOut(auth as IAuthProvider)}/>
+                <Button title="Get Response" onPress={getStore}></Button>
             </View>
+           
         </View>
-    )}
-    </AuthContext.Consumer>)
+    )
 }
 
 const styles = StyleSheet.create({

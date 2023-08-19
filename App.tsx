@@ -9,31 +9,16 @@ import { Button, View, TextInput, Image, StyleSheet } from "react-native";
 
 
 
-const AuthStack = createStackNavigator();
 
-const AuthStackScreens = () =>{
-  return(
-    <AuthStack.Navigator initialRouteName="SignUp">
-      <AuthStack.Screen name="SignUp" component={Signup} options={{headerShown: false}}/>
-      <AuthStack.Screen name="SignIn" component={LoginScreen} options={{headerShown: false}}/>
-    </AuthStack.Navigator>
-  )
-}
+
 export default function App() {
   return (
-    <AuthProvider>
-    <AuthContext.Consumer>
-  {(auth)=><NavigationContainer>
-    {/* <stack.Navigator> */}
-      {/* <stack.Screen name="MAD(A)" component={HomeScreen}/>
-      <stack.Screen name="List Of Products" component={ListScreen}/>
-      <stack.Screen name="Counter" component={ListScreen}/>
-      <stack.Screen name="SignIn" component={LoginScreen}/> */}
-      {auth?.isLoggedIn? <ListScreen/> : <AuthStackScreens/>}
-    {/* </stack.Navigator> */}
-  </NavigationContainer>}
-  </AuthContext.Consumer>
-  </AuthProvider>
+    <NavigationContainer>
+   
+       <ListScreen/> 
+    
+  </NavigationContainer>
+  
   );
 }
 
